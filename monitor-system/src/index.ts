@@ -1,23 +1,27 @@
 'use strict';
 
+import env from '@/src/handleEnv';
 import initExceptionMonitor from '@/src/handleException';
-// import instance from '@/lib/request'
+import initPerformanceMonitor from '@/src/handlePerformance';
 
-(function MonitorSystem () {
+window.addEventListener('load', function MonitorSystem () {
   'use strict';
 
   if(!(Window && window && window instanceof Window)) {
-    throw new Error('Invalid global!');
+    throw new Error('Invalid running environment!');
   }
 
-  initExceptionMonitor(window)
+  console.log(env);
 
-})()
+  initExceptionMonitor();
+  initPerformanceMonitor();
 
-async function test () {
-  // document.body.innerHTML = '<img src="1a" />';
-  // eval('var 1');
-  // await instance.get('/34')
-}
+  async function test () {
+    // document.body.innerHTML = '<img src="1a" />';
+    // eval('var 1');
+    // await instance.get('/34')
+  }
 
-test();
+  test();
+
+})
