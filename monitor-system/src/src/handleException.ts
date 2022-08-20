@@ -27,9 +27,9 @@ const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
   throw event.reason;
 }
 
-const initExceptionMonitor = (global: Window) => {
-  global.addEventListener('error', handleGlobalJsError, true);
-  global.addEventListener('unhandledrejection', handleUnhandledRejection);
+const initExceptionMonitor = () => {
+  window.addEventListener('error', handleGlobalJsError, true);
+  window.addEventListener('unhandledrejection', handleUnhandledRejection);
 }
 
 export default initExceptionMonitor
