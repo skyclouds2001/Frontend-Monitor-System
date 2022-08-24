@@ -1,12 +1,9 @@
 import express from 'express';
 
-interface Response {
-  data: null | string | object,
-  success: boolean,
-  message: string,
-}
-
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/v1/system/login', (req, res) => {
   const { code } = req.query;
@@ -14,33 +11,36 @@ app.get('/v1/system/login', (req, res) => {
   const buffer = Buffer.from(JSON.stringify({ code, timestamp }), 'utf-8');
   const id = buffer.toString('base64');
 
-  let response: Response;
   if (code) {
-    response = {
+    res.send({
       success: true,
       data: id,
       message: '请求成功',
-    };
+    });
   } else {
-    response = {
+    res.send({
       success: false,
       data: null,
       message: '请求失败',
-    };
+    });
   }
-  res.send(response);
+  res.end();
 });
 
 app.post('/v1/data/post', (req, res) => {
   console.log(req.body);
-  console.log(res);
+
+  res.send();
+  res.end();
 });
 
 app.get('v1/data/get', (req, res) => {
   console.log(req.params);
-  console.log(res);
-})
+
+  res.send();
+  res.end();
+});
 
 app.listen(8000, () => {
   console.log('App is running at http://localhost:8000.')
-})
+});
