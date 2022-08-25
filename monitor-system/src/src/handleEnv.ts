@@ -4,7 +4,7 @@ const getEnv = () => {
     platform: window.navigator.platform,
     language: window.navigator.language,
     url: window.location.href,
-    // net: window.navigator.connection.effectiveType,
+    net: (window.navigator.connection as any).effectiveType,
     screenW: window.screen.width,
     screenH: window.screen.height,
     cookieEnabled: window.navigator.cookieEnabled,

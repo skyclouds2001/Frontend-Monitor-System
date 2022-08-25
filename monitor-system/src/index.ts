@@ -3,6 +3,7 @@
 import test from '@/lib/test'
 import env from '@/src/handleEnv';
 import initExceptionMonitor from '@/src/handleException';
+import { postAppInfo } from '@/api/postAppInfo';
 
 window.addEventListener('load', function MonitorSystem () {
   'use strict';
@@ -11,7 +12,7 @@ window.addEventListener('load', function MonitorSystem () {
     throw new Error('Invalid running environment!');
   }
 
-  console.log(env);
+  postAppInfo(env).then(result => result.success ? undefined : console.error(result)).catch(error => console.error(error));
 
   initExceptionMonitor();
 
