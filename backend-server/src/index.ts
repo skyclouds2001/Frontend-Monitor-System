@@ -1,6 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 
+interface Record {
+  timestamp: number,
+  type: number,
+  record: any,
+}
+
 const app = express();
 
 app.use(express.json());
@@ -43,13 +49,14 @@ app.post('/v1/data/post', (req, res) => {
 
   const { type, data } = req.body;
 
-  if([0, 1].includes(type) && ['object', 'string'].includes(typeof data)) {
+  if([0, 1, 2].includes(type) && ['object', 'string'].includes(typeof data)) {
 
     if (type === 0) {
       cache.appInfo = { ...data };
     } else {
       cache.records.push({
         timestamp: new Date().getTime(),
+        type: type,
         record: data,
       });
     }
@@ -73,23 +80,37 @@ app.post('/v1/data/post', (req, res) => {
 /**
  * 接受记录请求并返回缓存
  */
-app.get('v1/data/get', (req, res) => {
+app.get('/v1/data/get', (req, res) => {
   res.contentType('application/json');
 
-  console.log(req.params);
+  const { type } = req.query;
 
-  res.send();
+  if(typeof type === 'string') {
+
+    const records = cache.records.filter(v => v.type === parseInt(type as string));
+    // cache.records = cache.records.filter(v => v.type !== parseInt(type as string));
+
+    res.send({
+      success: true,
+      data: records,
+      message: '请求成功',
+    });
+  } else {
+    res.send({
+      success: false,
+      data: null,
+      message: '请求失败',
+    });
+  }
 
   res.end();
 });
 
-app.listen(8080, () => {
-  console.log('App is running at http://localhost:8080.')
-});
+app.listen(8080);
 
 const Cache = class Cache {
   public appInfo: object = {};
-  public records: object[] = [];
+  public records: Record[] = [];
 };
 
 const cache = new Cache();
