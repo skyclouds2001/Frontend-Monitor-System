@@ -41,6 +41,15 @@ app.get('v1/data/get', (req, res) => {
   res.end();
 });
 
-app.listen(8000, () => {
-  console.log('App is running at http://localhost:8000.')
+app.listen(8080, () => {
+  console.log('App is running at http://localhost:8080.')
 });
+
+const Cache = class Cache {
+  public appInfo: object = {};
+  public data: object[] = [];
+};
+
+const cache = new Cache();
+
+console.log(cache);
