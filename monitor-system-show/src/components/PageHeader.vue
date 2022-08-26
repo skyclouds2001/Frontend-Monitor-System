@@ -3,11 +3,12 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
 
-const title = store.state.pageHeaderTitle;
+const title = computed(() => store.state.pageHeaderTitle);
 </script>
 
 <script lang="ts">
