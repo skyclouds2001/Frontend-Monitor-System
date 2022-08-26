@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AsideBar from '@/components/AsideBar.vue';
+import PageHeader from '@/components/PageHeader.vue';
 </script>
 
 <template>
@@ -9,7 +10,9 @@ import AsideBar from '@/components/AsideBar.vue';
     </el-aside>
     <el-main>
       <el-container>
-        <el-header height="60px"></el-header>
+        <el-header height="60px">
+          <PageHeader />
+        </el-header>
         <el-main>
           <router-view></router-view>
         </el-main>
