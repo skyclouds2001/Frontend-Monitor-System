@@ -1,9 +1,17 @@
 import { createStore } from 'vuex';
 
 export default createStore({
-  state () {},
+  state () {
+    return {
+      pageHeaderTitle: '',
+    }
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    updateTitle (state, title) {
+      state.pageHeaderTitle = title;
+    },
+  },
   actions: {},
   strict:  process.env.NODE_ENV !== 'production',
 });

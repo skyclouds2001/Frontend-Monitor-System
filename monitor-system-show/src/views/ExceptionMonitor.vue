@@ -15,11 +15,15 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useStore } from 'vuex'
 import { getRecords } from '@/api/getRecords';
+
+const store = useStore();
 
 const records = ref<object[]>([]);
 
 const init = async () => {
+  store.commit('updateTitle','异常监控');
   try {
     const result = await getRecords();
 
