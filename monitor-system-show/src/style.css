@@ -61,9 +61,13 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
+  max-width: 1920px;
+  width: 100vw;
+  min-width: 1280px;
+  min-height: 100vh;
+  height: auto;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
