@@ -2,6 +2,9 @@
 </template>
 
 <script lang="ts" setup>
+import { useStore } from 'vuex';
+
+useStore().commit('updateTitle','首页');
 </script>
 
 <script lang="ts">

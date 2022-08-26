@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 import { getRecords } from '@/api/getRecords';
 
 useStore().commit('updateTitle','异常监控');
